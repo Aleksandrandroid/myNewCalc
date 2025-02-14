@@ -43,7 +43,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
         }
     }
 
-
+// бла бла бла  //
 
 }
 
