@@ -1,8 +1,6 @@
 package com.example.calculator
 
 import android.os.Bundle
-import android.util.Log
-
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
@@ -14,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +40,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
         }
     }
 
-// бла бла бла  //
+
 
 }
 

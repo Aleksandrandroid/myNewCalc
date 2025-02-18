@@ -1,7 +1,6 @@
 package com.example.calculator
 
 import android.util.Log
-import androidx.collection.emptyLongSet
 import androidx.core.text.isDigitsOnly
 
 class Calculator() {
@@ -21,7 +20,12 @@ class Calculator() {
             operation = num
             flag = true
 
-        } else if (num.isDigitsOnly()) {
+        } else if (num == "*") {
+            operation = num
+            flag = true
+        }
+
+        else if (num.isDigitsOnly()) {
 
             if (flag == false) {
                 num1 = Integer.parseInt(num)
