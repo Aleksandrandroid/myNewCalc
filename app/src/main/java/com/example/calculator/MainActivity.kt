@@ -12,9 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,7 +44,6 @@ class MainActivity : androidx.activity.ComponentActivity() {
     }
 
 
-
 }
 
 @Composable
@@ -53,60 +55,59 @@ fun CalculatorScreen(calculator: Calculator) {
     ) {
         CreateFirstRow("0")
 
-        CreateStandardRow(calculator,
+        CreateStandardRow(
+            calculator,
             "AC", color1 = colorResource(R.color.asphalt),
             "+-", color2 = colorResource(R.color.asphalt),
             "%", color3 = colorResource(R.color.asphalt),
             "÷", color4 = colorResource(R.color.orange)
         )
 
-        CreateStandardRow(calculator,
+        CreateStandardRow(
+            calculator,
             "7", color1 = colorResource(R.color.greylight),
             "8", color2 = colorResource(R.color.greylight),
             "9", color3 = colorResource(R.color.greylight),
             "х", color4 = colorResource(R.color.orange)
         )
 
-        CreateStandardRow(calculator,
+        CreateStandardRow(
+            calculator,
             "4", color1 = colorResource(R.color.greylight),
             "5", color2 = colorResource(R.color.greylight),
             "6", color3 = colorResource(R.color.greylight),
             "-", color4 = colorResource(R.color.orange)
         )
 
-        CreateStandardRow(calculator,
+        CreateStandardRow(
+            calculator,
             "1", color1 = colorResource(R.color.greylight),
             "2", color2 = colorResource(R.color.greylight),
             "3", color3 = colorResource(R.color.greylight),
             "+", color4 = colorResource(R.color.orange)
         )
 
-        CreateLastRow(calculator,"0", ",", "=")
+        CreateLastRow(calculator, "0", ",", "=")
     }
 }
 
 @Composable
-fun CreateText(calculator: Calculator,
-    value: String) {
-   // Text(text = value, fontSize = 40.sp, color = Color.White)
-
-//    Button(onClick = {                                   //кнопка
-//       calculator.getNumber(value)
-//    }) {
-//        Text(value)
-//    }
-
-    FilledTonalButton(onClick = {
+fun CreateText(
+    calculator: Calculator,
+    value: String
+) {
+    TextButton(onClick = {    //тестовая кнопка
         calculator.getNumber(value)
     }) {
-        Text(value)
+        Text(text = value, fontSize = 40.sp, color = Color.White)
     }
-
 }
 
 @Composable
-fun CreateBox(calculator: Calculator,
-    value: String, color: Color) {
+fun CreateBox(
+    calculator: Calculator,
+    value: String, color: Color
+) {
     Box(
         modifier = Modifier
             .fillMaxHeight()
@@ -158,7 +159,7 @@ fun CreateStandardRow(
             .fillMaxWidth()
     ) {
         CreateBox(calculator, value1, color1)
-        CreateBox(calculator,  value2, color2)
+        CreateBox(calculator, value2, color2)
         CreateBox(calculator, value3, color3)
         CreateBox(calculator, value4, color4)
     }
@@ -191,7 +192,7 @@ fun CreateLastRow(calculator: Calculator, val1: String, val2: String, val3: Stri
             .fillMaxWidth()
     ) {
         CreateBigBox(calculator, val1)
-        CreateBox(calculator,  val2, color = colorResource(R.color.greylight))
+        CreateBox(calculator, val2, color = colorResource(R.color.greylight))
         CreateBox(calculator, val3, color = colorResource(R.color.orange))
     }
 }
@@ -209,15 +210,15 @@ fun FirstBox(value: String) {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true)   //превьюшка
 @Composable
 fun GreetingPreview() {
     CalculatorTheme {
-      //  CalculatorScreen()
+        CalculatorScreen(calculator = Calculator())
     }
 }
 
-// @Preview(showBackground = true)
+
 @Composable
 fun ShowNewRow(calculator: Calculator) {
     CreateStandardRow(
@@ -228,13 +229,6 @@ fun ShowNewRow(calculator: Calculator) {
         value4 = "a", color4 = colorResource(R.color.teal_700)
     )
 }
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ShowTextLine() {
-//    CreateText("Q")
-//}
 
 
 /**
