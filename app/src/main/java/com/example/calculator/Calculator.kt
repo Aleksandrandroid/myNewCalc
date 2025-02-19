@@ -12,11 +12,9 @@ class Calculator() {
 
     fun getNumber(num: String) {
         if (num == "+") {
-            //   add(num1, num2)
             operation = num
             flag = true
         } else if (num == "-") {
-            //     subract(num1, num2)
             operation = num
             flag = true
 
@@ -38,10 +36,7 @@ class Calculator() {
             val a = equal()
             flag = false
             Log.e("eee", a.toString())    // логирование
-
         }
-
-
 
     }
 
@@ -54,12 +49,11 @@ class Calculator() {
         result = num1 - num2
     }
 
-    fun multiply(num1: Int, num2: Int) {
+    fun multiply() {
         result = num1 * num2
-
     }
 
-    fun devide(num1: Int, num2: Int) {
+    fun devide() {
         result = num1 / num2
     }
 
@@ -68,6 +62,10 @@ class Calculator() {
             add()
         } else if (operation == "-") {
             subract()
+        } else if (operation == "*") {
+            multiply()
+        } else if (operation == "/"){
+            devide()
         }
         return result
     }
