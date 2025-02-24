@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +27,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.calculator.ui.theme.CalculatorTheme
 
 class MainActivity : androidx.activity.ComponentActivity() {
@@ -43,7 +45,6 @@ class MainActivity : androidx.activity.ComponentActivity() {
         }
     }
 
-
 }
 
 @Composable
@@ -53,14 +54,14 @@ fun CalculatorScreen(calculator: Calculator) {
         modifier = Modifier
             .background(color = Color.DarkGray)
     ) {
-        CreateFirstRow("0")
+        CreateFirstRow("0", calculator)
 
         CreateStandardRow(
             calculator,
-            "AC", color1 = colorResource(R.color.asphalt),
+            AC, color1 = colorResource(R.color.asphalt),
             "+-", color2 = colorResource(R.color.asphalt),
             "%", color3 = colorResource(R.color.asphalt),
-            "÷", color4 = colorResource(R.color.orange)
+            DIVIDE, color4 = colorResource(R.color.orange)
         )
 
         CreateStandardRow(
@@ -68,7 +69,7 @@ fun CalculatorScreen(calculator: Calculator) {
             "7", color1 = colorResource(R.color.greylight),
             "8", color2 = colorResource(R.color.greylight),
             "9", color3 = colorResource(R.color.greylight),
-            "х", color4 = colorResource(R.color.orange)
+            MULTIPLY, color4 = colorResource(R.color.orange)
         )
 
         CreateStandardRow(
@@ -76,7 +77,7 @@ fun CalculatorScreen(calculator: Calculator) {
             "4", color1 = colorResource(R.color.greylight),
             "5", color2 = colorResource(R.color.greylight),
             "6", color3 = colorResource(R.color.greylight),
-            "-", color4 = colorResource(R.color.orange)
+            SUBTRACT, color4 = colorResource(R.color.orange)
         )
 
         CreateStandardRow(
@@ -84,10 +85,10 @@ fun CalculatorScreen(calculator: Calculator) {
             "1", color1 = colorResource(R.color.greylight),
             "2", color2 = colorResource(R.color.greylight),
             "3", color3 = colorResource(R.color.greylight),
-            "+", color4 = colorResource(R.color.orange)
+            ADDITION, color4 = colorResource(R.color.orange)
         )
 
-        CreateLastRow(calculator, "0", ",", "=")
+        CreateLastRow(calculator, "0", COMMA, EQUALS)
     }
 }
 
@@ -99,7 +100,7 @@ fun CreateText(
     TextButton(onClick = {    //тестовая кнопка
         calculator.getNumber(value)
     }) {
-        Text(text = value, fontSize = 40.sp, color = Color.White)
+        Text(text = value, fontSize = 30.sp, color = Color.Green)
     }
 }
 
@@ -167,7 +168,7 @@ fun CreateStandardRow(
 
 
 @Composable
-fun CreateFirstRow(value: String) {
+fun CreateFirstRow(value: String, calculator: Calculator) {
     Row(
         modifier = Modifier
             .height(150.dp)
@@ -180,7 +181,7 @@ fun CreateFirstRow(value: String) {
             )
             .background(color = Color.DarkGray)
     ) {
-        FirstBox(value)
+        FirstBox(value, calculator)
     }
 }
 
@@ -198,7 +199,9 @@ fun CreateLastRow(calculator: Calculator, val1: String, val2: String, val3: Stri
 }
 
 @Composable
-fun FirstBox(value: String) {
+fun FirstBox(value: String, calculator: Calculator) {
+
+    val result by calculator.result1.collectAsStateWithLifecycle()
     Box(
         modifier = Modifier
             .fillMaxHeight()
@@ -206,7 +209,8 @@ fun FirstBox(value: String) {
             .padding(24.dp),
         contentAlignment = Alignment.CenterEnd
     ) {
-        Text(text = value, fontSize = 50.sp, color = Color.White)
+        Text(text = result.toString(), fontSize = 50.sp, color = Color.Red)
+
     }
 }
 
