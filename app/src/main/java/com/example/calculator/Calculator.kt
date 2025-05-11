@@ -18,9 +18,26 @@ class Calculator() {
     private var num2: String = ""
     private var flag: Boolean = false // в  фолс - 1е число, в тру - 2е
     private var operation: String = ""
-    private val _result1 =
-        MutableStateFlow(  "")   //переменная использоуется только в тоом классе, где она написана.
+    private val _result1 = MutableStateFlow(  "")   //переменная использоуется только в тоом классе, где она написана.
     val result1 = _result1.asStateFlow()   // result1 - переменная вытаскивает наружу класса
+
+ private val map = HashMap<String, String>()
+    fun mapTest(testKey: String) {
+        map["testKey"] = "value"
+        map["testKey1"] = "value1"
+        map["testKey2"] = "value2"
+        map["testKey3"] = "value3"
+        map.put("testKey4", "value4")
+
+        Log.d("MapTest", "map keys = ${map.keys}")
+        Log.d("MapTest", "map vals = ${map.values}")
+        Log.d("MapTest", "map vals = ${map.entries}")
+
+        Log.d("MapTest", "map has key $testKey = ${map.containsKey(testKey)} val = ${map[testKey]}")
+    }
+
+
+
 
 
     fun getNumber(num: String) {
@@ -56,7 +73,7 @@ class Calculator() {
                 Log.e("eee", "num2 = $num2")
                 Log.e("eee", a.toString()) // логирование
             } catch (error: NumberFormatException) {
-                Log.e("eee", "Ошибка произошла")
+                Log.e("eee", "Ошибка $error")
             } catch (error: ArithmeticException) {
                 Log.e("eee", "Деление на ноль - не определеноо")
                 _result1.value = "Не определено"
@@ -83,12 +100,14 @@ class Calculator() {
         result = num1Int / num2Int
     }
 
+
     fun delete() {
         flag = false
         result = 0
         num1 = ""
         num2 = ""
         operation = ""
+        mapTest("testKey")
     }
 
     fun equal(num1Int: Int, num2Int: Int): Int {
@@ -103,5 +122,6 @@ class Calculator() {
         }
         return result
     }
+
 
 }

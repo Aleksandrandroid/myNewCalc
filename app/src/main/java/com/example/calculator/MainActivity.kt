@@ -34,7 +34,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val calculator: Calculator = Calculator() //объект калькулятор
+        val calculator: Calculator = Calculator()
 
 
         enableEdgeToEdge()
@@ -88,7 +88,7 @@ fun CalculatorScreen(calculator: Calculator) {
             ADDITION, color4 = colorResource(R.color.orange)
         )
 
-        CreateLastRow(calculator, "0", COMMA, EQUALS)
+        CreateLastRow(calculator, "0", ",", EQUALS)
     }
 }
 
@@ -125,6 +125,7 @@ fun CreateBox(
         CreateText(calculator, value)
     }
 }
+
 
 
 @Composable
@@ -214,7 +215,7 @@ fun FirstBox(value: String, calculator: Calculator) {
     }
 }
 
-@Preview(showBackground = true)   //превьюшка
+@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     CalculatorTheme {
