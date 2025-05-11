@@ -123,5 +123,8 @@ class Calculator() {
         return result
     }
 
+fun jump() {
+    println("dfdfdfd")
+}
 
 }
